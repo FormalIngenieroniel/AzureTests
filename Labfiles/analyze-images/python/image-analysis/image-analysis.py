@@ -104,7 +104,7 @@ def show_objects(image_filename, detected_objects):
 
     plt.imshow(image)
     plt.tight_layout(pad=0)
-    objectfile = 'objects.jpg'
+    objectfile = 'objects(exp1).jpg'
     fig.savefig(objectfile)
     print('  Resultados guardados en', objectfile)
 
@@ -124,7 +124,7 @@ def show_people(image_filename, detected_people):
 
     plt.imshow(image)
     plt.tight_layout(pad=0)
-    peoplefile = 'people.jpg'
+    peoplefile = 'people(exp1).jpg'
     fig.savefig(peoplefile)
     print('  Resultados guardados en', peoplefile)
 
