@@ -5,9 +5,11 @@ import sys
 from PIL import Image, ImageDraw
 from matplotlib import pyplot as plt
 
+from azure.ai.vision.imageanalysis import ImageAnalysisClient
+from azure.ai.vision.imageanalysis.models import VisualFeatures
+from azure.core.credentials import AzureKeyCredential
+
 # import namespaces
-
-
 
 def main():
 
@@ -28,9 +30,32 @@ def main():
 
         # Authenticate Azure AI Vision client
 
+        client = ImageAnalysisClient(
+            endpoint=ai_endpoint,
+            credential=AzureKeyCredential(ai_key)
+        )
+
+        with open(image_file, "rb") as f:
+            image_data = f.read()
+
+        print(f'Analizando {image_file}\n')
+
+        result = client.analyze(
+            image_data=image_data,
+            visual_features=[
+                VisualFeatures.READ
+                ]
+        )
         
         # Read text in image
-        
+        # Print the text
+        if result.read is not None:
+            print("\nText:")
+
+        for line in result.read.blocks[0].lines:
+            print(f" {line.text}")
+        # Annotate the text in the image
+        annotate_lines(image_file, result.read)
 
         # Print the text
         
@@ -58,7 +83,7 @@ def annotate_lines(image_file, detected_text):
     # Save image
     plt.imshow(image)
     plt.tight_layout(pad=0)
-    textfile = 'lines.jpg'
+    textfile = 'lines(experimento3).jpg'
     fig.savefig(textfile)
     print('  Results saved in', textfile)
     
