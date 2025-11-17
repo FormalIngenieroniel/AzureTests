@@ -3,7 +3,6 @@ import json
 
 # Add references
 
-
 def main(): 
 
     # Clear the console
@@ -18,9 +17,6 @@ def main():
         api_version = os.getenv("API_VERSION")
         
         # Initialize the client
-        
-        
-
          
         img_no = 0
         # Loop until the user types 'quit'
